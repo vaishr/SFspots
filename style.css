@@ -1,0 +1,32 @@
+input {
+  color: black;
+}
+
+input[type=submit] {
+  background-color: #1FB5BB;
+}
+
+#placeInput {
+  width: 200px;
+}
+
+#placeNote {
+  width: 200px;
+}
+
+#map {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+}
+
+#inputPanel {
+  position: fixed;
+  top: 15px;
+  left: 70px;
+  z-index: 1;
+  background-color: gray;
+  padding: 10px;
+  opacity: 0.8;
+}

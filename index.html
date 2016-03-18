@@ -9,11 +9,22 @@
     <script src='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script>
     <link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet' />
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClH_lkoOsbknyTLgw1ogi48K0OnDWJAkc&libraries=places"></script>
-    <script src="build/map.js"></script>
+    <script src="app.js"></script>
     <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link href="style.css" rel="stylesheet" />
   </head>
   <body>
-
+    <div ng-controller="MapCtrl">
+      <div id="inputPanel">
+        <h3>Add Place to Map</h3>
+          <input id="placeInput" type="text" ng-model="inputText"><br>
+            <textarea id="placeNote" rows="3" ng-model="placeNote" placeholder="Add a note about the place" ng-disabled="!inputText"></textarea><br>
+            <input id="add" class="btn-sm" type="submit" value="Submit" ng-click="submit()">
+            <a href="#" ng-click="resetMap()">Reset Map View<a/>
+      </div>
+      <div>
+        <div id="map">Map</div>
+      </div>
+    </div>
   </body>
 </html>
