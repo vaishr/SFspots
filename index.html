@@ -16,11 +16,21 @@
   <body>
     <div ng-controller="MapCtrl">
       <div id="inputPanel">
-        <h3>Add Place to Map</h3>
-          <input id="placeInput" type="text" ng-model="inputText"><br>
-            <textarea id="placeNote" rows="3" ng-model="placeNote" placeholder="Add a note about the place" ng-disabled="!inputText"></textarea><br>
-            <input id="add" class="btn-sm" type="submit" value="Submit" ng-click="submit()">
-            <a href="#" ng-click="resetMap()">Reset Map View<a/>
+        <h4>Add Place to Map</h4>
+          <input class="form-control" id="placeInput" type="text" ng-model="inputText"><br>
+            <textarea class="form-control" id="placeNote" rows="3" ng-model="placeNote" placeholder="Add a note about the place" ng-disabled="!inputText"></textarea><br>
+            <input class="checkbox-inline" type="radio" name="group1" value="food" ng-model="placeType">Food
+            <input class="checkbox-inline" type="radio" name="group1" value="cafe" ng-model="placeType">Coffee
+             <input class="checkbox-inline" type="radio" name="group1" value="park" ng-model="placeType">Nature
+              <input class="checkbox-inline" type="radio" name="group1" value="pitch" ng-model="placeType">Active
+              <input class="checkbox-inline" type="radio" name="group1" value="bar" ng-model="placeType">Drink
+               <input class="checkbox-inline" type="radio" name="group1" value="theatre" ng-model="placeType">Arts
+            <input class="checkbox-inline" type="radio" name="group1" value="shop" ng-model="placeType"> Shopping
+            <input class="checkbox-inline" type="radio" name="group1" value="camera" ng-model="placeType"> Tourist
+            <input class="checkbox-inline" type="radio" name="group1" value="marker" ng-model="placeType" checked > Other<br>
+            <input class="checkbox-inline" id="add" class="btn btn-success" type="submit" value="Submit" ng-click="submit()">
+            <a href="#" ng-click="resetMap()">Reset Map View</a>
+          <br><h4>Your Places</h4>
       </div>
       <div>
         <div id="map">Map</div>

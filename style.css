@@ -2,16 +2,16 @@ input {
   color: black;
 }
 
-input[type=submit] {
-  background-color: #1FB5BB;
+.leaflet-popup-content {
+  background-color: gray;
 }
 
 #placeInput {
-  width: 200px;
+  width: 300px;
 }
 
 #placeNote {
-  width: 200px;
+  width: 300px;
 }
 
 #map {
@@ -23,10 +23,13 @@ input[type=submit] {
 
 #inputPanel {
   position: fixed;
-  top: 15px;
-  left: 70px;
   z-index: 1;
-  background-color: gray;
+  height: 100%;
+  background-color: #F5F5F5;
   padding: 10px;
-  opacity: 0.8;
+  opacity: 1.0;
+}
+
+.leaflet-bar a {
+  display: inline-block;
 }
