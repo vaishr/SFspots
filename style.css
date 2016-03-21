@@ -2,10 +2,6 @@ input {
   color: black;
 }
 
-.leaflet-popup-content {
-  background-color: gray;
-}
-
 #placeInput {
   width: 300px;
 }
@@ -21,15 +17,29 @@ input {
   bottom: 0;
 }
 
-#inputPanel {
+.inputPanel {
   position: fixed;
   z-index: 1;
   height: 100%;
-  background-color: #F5F5F5;
+  background-color:#F5F5F5;
   padding: 10px;
   opacity: 1.0;
 }
 
+#filter label {
+  float: right;
+  font-weight: normal;
+}
+
 .leaflet-bar a {
   display: inline-block;
+}
+
+
+/* Hide Google and Mapbox logos */
+.pac-container:after{
+    content:none !important;
+}
+.mapbox-logo-true {
+  display: none;
 }

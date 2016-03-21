@@ -15,22 +15,85 @@
   </head>
   <body>
     <div ng-controller="MapCtrl">
-      <div id="inputPanel">
+      <div class="inputPanel">
         <h4>Add Place to Map</h4>
-          <input class="form-control" id="placeInput" type="text" ng-model="inputText"><br>
+          <input class="form-control" id="placeInput" type="text" ng-model="inputText">
             <textarea class="form-control" id="placeNote" rows="3" ng-model="placeNote" placeholder="Add a note about the place" ng-disabled="!inputText"></textarea><br>
-            <input class="checkbox-inline" type="radio" name="group1" value="food" ng-model="placeType">Food
-            <input class="checkbox-inline" type="radio" name="group1" value="cafe" ng-model="placeType">Coffee
-             <input class="checkbox-inline" type="radio" name="group1" value="park" ng-model="placeType">Nature
-              <input class="checkbox-inline" type="radio" name="group1" value="pitch" ng-model="placeType">Active
-              <input class="checkbox-inline" type="radio" name="group1" value="bar" ng-model="placeType">Drink
-               <input class="checkbox-inline" type="radio" name="group1" value="theatre" ng-model="placeType">Arts
-            <input class="checkbox-inline" type="radio" name="group1" value="shop" ng-model="placeType"> Shopping
-            <input class="checkbox-inline" type="radio" name="group1" value="camera" ng-model="placeType"> Tourist
-            <input class="checkbox-inline" type="radio" name="group1" value="marker" ng-model="placeType" checked > Other<br>
-            <input class="checkbox-inline" id="add" class="btn btn-success" type="submit" value="Submit" ng-click="submit()">
-            <a href="#" ng-click="resetMap()">Reset Map View</a>
-          <br><h4>Your Places</h4>
+      <div class="container-fluid">
+        <div class="row">
+              <label for="1" class="col-md-4"><input id="1" type="radio" name="typeOptions" value="restaurant" ng-model="placeType"> Food
+              </label>
+              <label for="2" class="col-md-4">
+                  <input id="2" type="radio" name="typeOptions" value="cafe" ng-model="placeType"> Coffee
+              </label>
+              <label for="3" class="col-md-4">
+               <input id="3" "form-control" type="radio" name="typeOptions" value="park" ng-model="placeType"> Nature
+              </label>
+            </div>
+          <div class="row">
+               <label for="4" class="col-md-4">
+                <input id ="4" type="radio" name="typeOptions" value="pitch" ng-model="placeType"> Active
+              </label>
+                <label for="5" class="col-md-4">
+                  <input id="5" type="radio" name="typeOptions" value="bar" ng-model="placeType"> Nightlife
+                </label>
+                <label for="6" class="col-md-4">
+                 <input id="6" type="radio" name="typeOptions" value="theatre" ng-model="placeType"> Arts
+                </label>
+          </div>
+           <div class="row">
+                <label for="7" class="col-md-4">
+                  <input id="7" type="radio" name="typeOptions" value="shop" ng-model="placeType"> Shopping
+                </label>
+              <label for="8" class="col-md-4">
+              <input id="8" type="radio" name="typeOptions" value="camera" ng-model="placeType"> Tourist
+              </label>
+              <label for="9" class="col-md-4">
+                <input id="9" type="radio" name="typeOptions" value="roadblock" ng-model="placeType"> Avoid
+              </label>
+               <label for="10" class="col-md-4">
+                <input id="10" type="radio" name="typeOptions" value="star" ng-model="placeType"> Other
+              </label>
+            </div>
+        </div>
+         <br>
+         <div class = "container-fluid">
+          <div class = "row">
+            <input class = "col-xs-4" id="add" class="btn btn-success" type="submit" value="Submit" ng-click="submit()">
+            <div class = "col-xs-3"></div>
+             <div class = "col-xs-5"><a href="#" ng-click="resetMap()">Reset Map View</a></div>
+          </div>
+          </div>
+            <br><br>
+            <div class = "row">
+              <div class = "col-md-5">
+              <h3>Your Places</h3>
+              </div>
+              <div class = "col-md-2"></div>
+            <div class = "col-md-5" id="filter">
+             <label for="dropdown">Filter By: </label>
+                <select name = "dropdown" id="dropdown" class="form-control" ng-model="filterType">
+                  <option value=""></option>
+                  <option value="restaurant">Food</option>
+                  <option value="cafe">Coffee</option>
+                  <option value="park">Nature</option>
+                  <option value="pitch">Active</option>
+                  <option value="bar">Nightlife</option>
+                  <option value="theatre">Arts</option>
+                  <option value="shop">Shopping</option>
+                  <option value="camera">Tourist</option>
+                  <option value="roadblock">Avoid</option>
+                  <option value="star">Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="inputPanel" id ="list">
+              <table class="table table-hover">
+                <tr ng-repeat="item in geojson | filter:filterType track by $index">
+                <td>{{item.properties.title}}</td>
+                </tr>
+              </table>
+            </div>
       </div>
       <div>
         <div id="map">Map</div>

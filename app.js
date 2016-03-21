@@ -1,17 +1,10 @@
-var geojson = [];
+
 var autocomplete;
-var addMarker;
 var map;
 var myLayer;
 var input;
+var geojson = [];
 
-function init() {
-    input = document.getElementById('placeInput');
-    autocomplete = new google.maps.places.Autocomplete(input);
-    map = L.mapbox.map("map", "mapbox.wheatpaste").addControl(L.mapbox.shareControl());;
-    map.setView([37.763, -122.482], 13);
-    myLayer = L.mapbox.featureLayer().addTo(map);
-};
 
 function templateGeo(title, lat, lng, description, type) {
     return {
@@ -23,12 +16,12 @@ function templateGeo(title, lat, lng, description, type) {
         "properties": {
             "title": title,
             "description": description,
-            "type": type
+            "type": type,
+            "display": true
         }
     };
 }
 
-google.maps.event.addDomListener(window, "load", init);
 L.mapbox.accessToken = "pk.eyJ1IjoidmFpcmVkZHkxMSIsImEiOiJhYjVmNmY2MWQ3MmFiNThkZjBiZTA1MzdkNTg3NTJhZiJ9.6YTxS5LbsOmXzVcUWzgE7w";
 
 
@@ -37,11 +30,21 @@ L.mapbox.accessToken = "pk.eyJ1IjoidmFpcmVkZHkxMSIsImEiOiJhYjVmNmY2MWQ3MmFiNThkZ
 var app = angular.module("app", ["firebase"]);
 
 app.controller("MapCtrl", ["$scope", "$timeout", function ($scope, $timeout) {
+        $scope.init = function() {
+             input = document.getElementById('placeInput');
+             autocomplete = new google.maps.places.Autocomplete(input);
+             map = L.mapbox.map("map", "mapbox.wheatpaste", {attributionControl: false}).addControl(L.mapbox.shareControl());;
+             map.setView([37.763, -122.482], 13);
+             myLayer = L.mapbox.featureLayer().addTo(map);
+            }        
+        $scope.placeType = "star";
+        google.maps.event.addDomListener(window, "load", $scope.init);
         $scope.resetMap = function() {
             map.setView([37.763, -122.482], 13);
         }
-        $scope.placeType;
+        $scope.geojson = geojson;
         $scope.submit = function () {
+            $scope.placeType;
             var note = $scope.placeNote;
             var place = autocomplete.getPlace();
             var lat = place.geometry.location.lat();
@@ -49,18 +52,20 @@ app.controller("MapCtrl", ["$scope", "$timeout", function ($scope, $timeout) {
             console.log("place", place);
             console.log($scope.placeNote);
             console.log("type:", $scope.placeType);
-            geojson.push(templateGeo(place.name, lat, lng, note));
+            geojson.push(templateGeo(place.name, lat, lng, note, $scope.placeType));
             console.log("geoJson", geojson);
-            addMarker = function (lati, long, name, description, type) {
+            var addMarker = function (lati, long, name, description, type) {
                 var symbols = {
                     "cafe" : "#FF9800",
+                    "restaurant" : "#EEFF41",
                     "shop" : "#FF5722",
                     "bar": "#F50057",
                     "theatre": "#D500F9",
-                    "marker" : "#00B0FF",
                     "park" : "#00C853",
-                    "active" : "#76FF03",
-                    "tourist": "#1DE9B6"
+                    "pitch" : "#76FF03",
+                    "camera": "#1DE9B6",
+                    "roadblock": "#455A64",
+                    "star" : "#00B0FF"
                 };
                 var newMarker = L.marker([lati, long], {
                     icon: L.mapbox.marker.icon({
@@ -72,11 +77,17 @@ app.controller("MapCtrl", ["$scope", "$timeout", function ($scope, $timeout) {
                 var content = "<h2>" + name + "</h2><h3>" + description + "</h3>";
                 newMarker.addTo(map);
                 newMarker.bindPopup(content);
-                map.scrollWheelZoom.disable();
             };
             addMarker(lat, lng, place.name, note, $scope.placeType);
+            $scope.placeType = "star";
+            $scope.placeNote = "";
         };
     }]);
+
+// app.directive('placesAutocomplete', function() {
+//     restrict: 'C',
+
+// });
 
 angular.element(document).ready(function () {
     angular.bootstrap(document, [app.name], {
