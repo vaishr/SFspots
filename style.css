@@ -5,7 +5,7 @@ input {
 #list {
   overflow-y: auto;
   height: 400px;
-/*width: 400px;*/
+  overflow-x: hidden;
 }
 
 #placeInput {
@@ -53,6 +53,9 @@ input {
   display: inline-block;
 }
 
+.table > tbody > tr > td {
+  padding: 18px 0 18px 18px;
+}
 
 /* Hide Google and Mapbox logos */
 .pac-container:after{

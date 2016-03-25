@@ -9,6 +9,15 @@ var places = [];
 function templateGeo(place, note, type) {
     var lat = place.geometry.location.lat();
     var lng = place.geometry.location.lng();
+
+    var formatAddress = function(place) {
+        var formatted_add = place.formatted_address;
+        if (formatted_add.indexOf(", CA") > -1) {
+            var index = formatted_add.indexOf(", CA");
+            formatted_add = formatted_add.slice(0, index+4);
+        }
+        return formatted_add;
+    }
     
     // var photoURLs = [];
     // function getPhotos(place) {
@@ -34,7 +43,7 @@ function templateGeo(place, note, type) {
             "type": type,
             "website": place.website,
             "phone_number": place.formatted_phone_number,
-            "address": place.formatted_address
+            "address": formatAddress(place)
             //"opening_hours": place.opening_hours.weekday_text,
             //"images": getPhotos(place)
         }

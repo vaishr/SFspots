@@ -87,11 +87,11 @@
                 </select>
               </div>
             </div>
-            <div class="inputPanel" id ="list">
+            <div id ="list">
               <table class="table table-hover">
               <tbody>
                 <tr ng-repeat="item in placeList track by $index">
-                <td><img ng-src="Images/{{item.properties.type}}.png"></div><br>{{item.properties.title}}<br>{{item.properties.description}}<br>{{item.properties.address}}<br></td>
+                <td><div class="row"><img ng-src="Images/{{item.properties.type}}.png"><span id="placeListTitle">{{item.properties.title}}</span></div><br>{{item.properties.description}}<br>{{item.properties.address}}<br></td>
                 </tr>
               </tbody>
               </table>
