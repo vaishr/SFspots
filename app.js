@@ -10,16 +10,17 @@ function templateGeo(place, note, type) {
     var lat = place.geometry.location.lat();
     var lng = place.geometry.location.lng();
     
-    var photoURLs = [];
-    function getPhotos(place) {
-        for (var i = 0; i < 10; i++) {
-            photoURLs.push(place.photos[i].getUrl({'maxWidth': 800, 'maxHeight': 800}));
-        }
-        return photoURLs;
-    }
-    getPhotos(place);
+    // var photoURLs = [];
+    // function getPhotos(place) {
+    //     if (place.photos)
+    //     for (var i = 0; i < 10; i++) {
+    //         photoURLs.push(place.photos[i].getUrl({'maxWidth': 800, 'maxHeight': 800}));
+    //     }
+    //     return photoURLs;
+    // }
+    // getPhotos(place);
     
-    console.log('photos', photoURLs);
+    // console.log('photos', photoURLs);
    
     return {
         "type": "Feature",
@@ -33,15 +34,14 @@ function templateGeo(place, note, type) {
             "type": type,
             "website": place.website,
             "phone_number": place.formatted_phone_number,
-            "address": place.formatted_address,
-            "opening_hours": place.opening_hours.weekday_text,
-            "images": getPhotos(place)
+            "address": place.formatted_address
+            //"opening_hours": place.opening_hours.weekday_text,
+            //"images": getPhotos(place)
         }
     };
 }
 
 L.mapbox.accessToken = "pk.eyJ1IjoidmFpcmVkZHkxMSIsImEiOiJhYjVmNmY2MWQ3MmFiNThkZjBiZTA1MzdkNTg3NTJhZiJ9.6YTxS5LbsOmXzVcUWzgE7w";
-
 
 var app = angular.module("app", ["firebase"]);
 
@@ -68,12 +68,12 @@ app.controller("MapCtrl", ["$scope", "$timeout", function ($scope, $timeout) {
             var place = autocomplete.getPlace();
             var newPlace = templateGeo(place, note, $scope.placeType);
             places.push(newPlace);
-            if (!newPlace.properties.images.length) {
-                $scope.hasImage = false;
-            }
-            if (newPlace.properties.images.length > 0) {
-                $scope.hasImage = true;
-            }
+            // if (!newPlace.properties.images.length) {
+            //     $scope.hasImage = false;
+            // }
+            // if (newPlace.properties.images.length > 0) {
+            //     $scope.hasImage = true;
+            // }
             console.log("place", place);
             console.log($scope.placeNote);
             console.log("type:", $scope.placeType);

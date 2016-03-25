@@ -91,12 +91,12 @@
               <table class="table table-hover">
               <tbody>
                 <tr ng-repeat="item in placeList track by $index">
-                <td><div ng-if="hasImage"><img ng-src={{item.properties.images[0]}} class="img-circle"></div><br>{{item.properties.title}}<br>{{item.properties.description}}<br>{{item.properties.address}}<br></td>
+                <td><img ng-src="Images/{{item.properties.type}}.png"></div><br>{{item.properties.title}}<br>{{item.properties.description}}<br>{{item.properties.address}}<br></td>
                 </tr>
               </tbody>
               </table>
             </div>
-      </div>
+              </div>
       <div>
         <div id="map">Map</div>
       </div>
