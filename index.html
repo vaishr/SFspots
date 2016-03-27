@@ -17,51 +17,31 @@
     <div ng-controller="MapCtrl">
       <div class="inputPanel">
         <h4>Add Place to Map</h4>
-          <input class="form-control" id="placeInput" type="text" ng-model="inputText">
-            <textarea class="form-control" id="placeNote" rows="3" ng-model="placeNote" placeholder="Add a note about the place" ng-disabled="!inputText"></textarea><br>
-      <div class="container-fluid">
-        <div class="row">
-              <label for="1" class="col-md-4"><input id="1" type="radio" name="typeOptions" value="restaurant" ng-model="placeType"> Food
-              </label>
-              <label for="2" class="col-md-4">
-                  <input id="2" type="radio" name="typeOptions" value="cafe" ng-model="placeType"> Coffee
-              </label>
-              <label for="3" class="col-md-4">
-               <input id="3" "form-control" type="radio" name="typeOptions" value="park" ng-model="placeType"> Nature
-              </label>
-            </div>
-          <div class="row">
-               <label for="4" class="col-md-4">
-                <input id ="4" type="radio" name="typeOptions" value="pitch" ng-model="placeType"> Active
-              </label>
-                <label for="5" class="col-md-4">
-                  <input id="5" type="radio" name="typeOptions" value="bar" ng-model="placeType"> Nightlife
-                </label>
-                <label for="6" class="col-md-4">
-                 <input id="6" type="radio" name="typeOptions" value="theatre" ng-model="placeType"> Arts
-                </label>
+          <div id = "placeEnter">
+            <input class="form-control" id="placeInput" type="text" ng-model="place">
+             <span ng-if="noLocationErr" id="noLocationErr" class="help-block">Please enter a place </span>
+             <span ng-if="repeatPlace" id="repeatPlace" class="help-block"> This place is already on your list </span>
           </div>
-           <div class="row">
-                <label for="7" class="col-md-4">
-                  <input id="7" type="radio" name="typeOptions" value="shop" ng-model="placeType"> Shopping
-                </label>
-              <label for="8" class="col-md-4">
-              <input id="8" type="radio" name="typeOptions" value="camera" ng-model="placeType"> Tourist
-              </label>
-              <label for="9" class="col-md-4">
-                <input id="9" type="radio" name="typeOptions" value="roadblock" ng-model="placeType"> Avoid
-              </label>
-               <label for="10" class="col-md-4">
-                <input id="10" type="radio" name="typeOptions" value="star" ng-model="placeType"> Other
-              </label>
-            </div>
-        </div>
+            <textarea class="form-control" id="placeNote" rows="3" ng-model="placeNote" placeholder="Add a note about the place"></textarea><br>
+          <select name = "dropdown" id="dropdownSubmit" class="form-control" ng-model="placeType">
+                  <option value=""></option>
+                  <option value="restaurant">Food</option>
+                  <option value="cafe">Coffee</option>
+                  <option value="park">Nature</option>
+                  <option value="pitch">Active</option>
+                  <option value="bar">Nightlife</option>
+                  <option value="theatre">Arts</option>
+                  <option value="shop">Shopping</option>
+                  <option value="camera">Tourist</option>
+                  <option value="roadblock">Avoid</option>
+                  <option value="star">Other</option>
+        </select>
          <br>
          <div class = "container-fluid">
           <div class = "row">
-            <input class = "col-xs-4" id="add" class="btn btn-success" type="submit" value="Submit" ng-click="submit()">
+            <div class = "col-xs-5"><a href="#" ng-click="resetMap()">Reset Map View</a></div>
             <div class = "col-xs-3"></div>
-             <div class = "col-xs-5"><a href="#" ng-click="resetMap()">Reset Map View</a></div>
+              <input class = "col-xs-4 btn btn-primary" id="add" type="submit" value="Submit" ng-click="submit()">
           </div>
           </div>
             <br><br>
@@ -90,7 +70,7 @@
             <div id ="list">
               <table class="table table-hover">
               <tbody>
-                <tr ng-repeat="item in placeList track by $index">
+                <tr ng-repeat="item in places track by $index">
                 <td><div class="row"><img ng-src="Images/{{item.properties.type}}.png"><span id="placeListTitle">{{item.properties.title}}</span></div><br>{{item.properties.description}}<br>{{item.properties.address}}<br></td>
                 </tr>
               </tbody>
