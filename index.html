@@ -19,8 +19,8 @@
         <h4>Add Place to Map</h4>
           <div id = "placeEnter">
             <input class="form-control" id="placeInput" type="text" ng-model="place">
-             <span ng-if="noLocationErr" id="noLocationErr" class="help-block">Please enter a place </span>
-             <span ng-if="repeatPlace" id="repeatPlace" class="help-block"> This place is already on your list </span>
+             <span ng-if="noLocationErr" class="help-block">Please enter a place </span>
+             <span ng-if="repeatPlace" class="help-block"> This place is already on your list </span>
           </div>
             <textarea class="form-control" id="placeNote" rows="3" ng-model="placeNote" placeholder="Add a note about the place"></textarea><br>
           <select name = "dropdown" id="dropdownSubmit" class="form-control" ng-model="placeType">
@@ -71,7 +71,7 @@
               <table class="table table-hover">
               <tbody>
                 <tr ng-repeat="item in places track by $index">
-                <td><div class="row"><img ng-src="Images/{{item.properties.type}}.png"><span id="placeListTitle">{{item.properties.title}}</span></div><br>{{item.properties.description}}<br>{{item.properties.address}}<br></td>
+                <td><div class="row"><img ng-src="Images/{{item.properties.type}}.png"><span id="placeListTitle">{{item.properties.title}}</span><button id="deleteItem" type="button" class="btn btn-danger btn-round" ng-click="removePlace($index)"><span class="glyphicon glyphicon-trash"></span></button><br></div><br>{{item.properties.description}}<br>{{item.properties.address}}<br><br></td>
                 </tr>
               </tbody>
               </table>

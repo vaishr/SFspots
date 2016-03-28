@@ -70,6 +70,7 @@ var app = angular.module("app", ["firebase"]);
 
 app.controller("MapCtrl", ["$scope", "$timeout", function ($scope, $timeout) {
         $scope.places = [];
+        $scope.markers = [];
         $scope.place = "";
         $scope.init = function() {
              input = document.getElementById('placeInput');
@@ -86,61 +87,19 @@ app.controller("MapCtrl", ["$scope", "$timeout", function ($scope, $timeout) {
         $scope.filter = function() {
             
         }
-        $scope.submit = function () {
-            console.log("$scope.place", $scope.place);
-            var note = $scope.placeNote;
-
-
-            var place = autocomplete.getPlace();
-            
-            $scope.checkErr = function() {
-            console.log('checkerrplcac', $scope.place);
-            $scope.repeatPlace = false;
-            $scope.noLocationErr = false;
-
-            if (!$scope.place) {
-                $scope.noLocationErr = true;
-                return true;
-                }
-
-            for (var i = 0; i < $scope.places.length; i++) {
-                    if (place.place_id === $scope.places[i].properties.place_id && $scope.place) {
-                        $scope.repeatPlace = true;   
-                        place = autocomplete.getPlace();
-                        return true;
-                    }
-                }
-            return false;
-            }
-      
-         
-        if (!$scope.checkErr()) {
-                var newPlace = templateGeo(place, note, $scope.placeType);
-                $scope.noLocationErr = false;
-                $scope.repeatPlace = false;
-                $scope.places.push(newPlace);
-                console.log('placeList', $scope.places);  
-                
-           
-            
-            // if (!newPlace.properties.images.length) {
-            //     $scope.hasImage = false;
-            // }
-            // if (newPlace.properties.images.length > 0) {
-            //     $scope.hasImage = true;
-            // }
-            console.log("place", $scope.place);
-            console.log($scope.placeNote);
-            console.log("type:", $scope.placeType);
-            console.log("places", $scope.places);
-            var addMarker = function (loc, note, type) {
-                var newMarker = L.marker([newPlace.geometry.coordinates[0], newPlace.geometry.coordinates[1]], {
+        $scope.addMarker =  function (loc, note, type) {
+                var newMarker = L.marker([loc.geometry.coordinates[0], loc.geometry.coordinates[1]], {
                     icon: L.mapbox.marker.icon({
                         'marker-color': symbols[type],
                         'marker-symbol': type,
                         'marker-size': 'large'
                     })
-                })
+                });
+
+                newMarker.id = loc.properties.place_id;
+
+                console.log("newMarkerID", newMarker.id);
+
                 
                 var content = "<h2><strong>" + loc.properties.title + "</strong></h2>";
                 if (loc.properties.address) {
@@ -153,23 +112,69 @@ app.controller("MapCtrl", ["$scope", "$timeout", function ($scope, $timeout) {
                     content += "<br><p>" + loc.properties.phone_number + "</p>";
 
                 }
+                $scope.markers.push(newMarker);
                 newMarker.addTo(map);
                 newMarker.bindPopup(content);
-            };
+        };
 
-            addMarker(newPlace, note, $scope.placeType);
+        $scope.submit = function () {
+            var note = $scope.placeNote;
+            var type = $scope.placeType;
+            var place = autocomplete.getPlace();
+            
+            function checkErr() {
+            $scope.repeatPlace = false;
+            $scope.noLocationErr = false;
 
-            //reset values to default after submit
-            $scope.placeType = "star";
-            $scope.placeNote = "";
-            $scope.place = "";
-            place = autocomplete.getPlace();
+            if (!$scope.place) {
+                $scope.noLocationErr = true;
+                $scope.placeNote = "";
+                $scope.placeType = "star";
+                return true;
+                }
 
+            for (var i = 0; i < $scope.places.length; i++) {
+                    if (place.place_id === $scope.places[i].properties.place_id && $scope.place) {
+                        $scope.repeatPlace = true;  
+                        $scope.placeNote = "";
+                        $scope.placeType = "star"; 
+                        return true;
+                    }
+                }
+            return false;
+            }
+      
+         
+        if (!checkErr()) {
+                var newPlace = templateGeo(place, note, type);
+                $scope.addMarker(newPlace, note, type);
+                $scope.noLocationErr = false;
+                $scope.repeatPlace = false;
+                $scope.places.push(newPlace);
+              
+                //reset values to default after submit 
+                $scope.place = "";
+                place = autocomplete.getPlace();
+                $scope.placeType = "star";
+                $scope.placeNote = "";
 
-            console.log("at reset, $scope.place", $scope.place);
+                 
+           
+            
+            // if (!newPlace.properties.images.length) {
+            //     $scope.hasImage = false;
+            // }
+            // if (newPlace.properties.images.length > 0) {
+            //     $scope.hasImage = true;
+            // }
         }
 
         };
+       
+        $scope.removePlace = function(index) {
+            $scope.places.splice(index, 1);
+            //var place_ID = 
+        }
     }]);
 
 angular.element(document).ready(function () {

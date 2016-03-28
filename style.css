@@ -37,8 +37,24 @@ input {
   opacity: 1.0;
 }
 
+.btn-round {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 12px;
+    float: right;
+}
+
 #dropdown {
   height: 28px;
+}
+
+.help-block {
+  color: #DE0032;
+}
+
+.glyphicon {
+  right: 5px;
 }
 
 
@@ -51,6 +67,10 @@ input {
 
 .leaflet-bar a {
   display: inline-block;
+}
+
+.table {
+  width: 95%;
 }
 
 .table > tbody > tr > td {
