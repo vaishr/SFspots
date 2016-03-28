@@ -1,8 +1,6 @@
 
 var autocomplete;
 var map;
-var myLayer;
-var input;
 
 
 function templateGeo(place, note, type) {
@@ -51,6 +49,7 @@ function templateGeo(place, note, type) {
     };
 }
 
+
 var symbols = {
     "cafe" : "#FF9800",
     "restaurant" : "#EEFF41",
@@ -73,12 +72,13 @@ app.controller("MapCtrl", ["$scope", "$timeout", function ($scope, $timeout) {
         $scope.markers = [];
         $scope.place = "";
         $scope.init = function() {
-             input = document.getElementById('placeInput');
+             var input = document.getElementById('placeInput');
              autocomplete = new google.maps.places.Autocomplete(input);
              map = L.mapbox.map("map", "mapbox.wheatpaste", {attributionControl: false}).addControl(L.mapbox.shareControl());;
              map.setView([37.763, -122.482], 13);
-             myLayer = L.mapbox.featureLayer().addTo(map);
-            }        
+             var myLayer = L.mapbox.featureLayer().addTo(map);
+        }
+                  
         $scope.placeType = "star";
         google.maps.event.addDomListener(window, "load", $scope.init);
         $scope.resetMap = function() {
@@ -173,7 +173,6 @@ app.controller("MapCtrl", ["$scope", "$timeout", function ($scope, $timeout) {
        
         $scope.removePlace = function(index) {
             var place_ID = $scope.places[index].properties.place_id;
-            console.log("placeidPlaces", place_ID);
             for (var i = 0; i < $scope.markers.length; i++) {
                 if ($scope.markers[i].id === place_ID) {
                      var markerToRemove = $scope.markers[i];
@@ -181,7 +180,10 @@ app.controller("MapCtrl", ["$scope", "$timeout", function ($scope, $timeout) {
                 }
             }
             $scope.places.splice(index, 1);
-        }
+        };
+
+
+        
     }]);
 
 angular.element(document).ready(function () {

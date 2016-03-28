@@ -53,8 +53,22 @@ input {
   color: #DE0032;
 }
 
+.btn-danger {
+  background-color: transparent;
+}
+
+.btn-danger:hover .glyphicon {
+   color: white;
+}
+
+#placeListTitle {
+  padding-left: 18px;
+  font-size: 20px;
+}
+
 .glyphicon {
   right: 5px;
+  color: #d43f3a;
 }
 
 
@@ -74,7 +88,7 @@ input {
 }
 
 .table > tbody > tr > td {
-  padding: 18px 0 18px 18px;
+  padding: 18px 0 0 18px;
 }
 
 /* Hide Google and Mapbox logos */

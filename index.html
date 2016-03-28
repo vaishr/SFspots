@@ -71,7 +71,7 @@
               <table class="table table-hover">
               <tbody>
                 <tr ng-repeat="item in places track by $index">
-                <td><div class="row"><img ng-src="Images/{{item.properties.type}}.png"><span id="placeListTitle">{{item.properties.title}}</span><button id="deleteItem" type="button" class="btn btn-danger btn-round" ng-click="removePlace($index)"><span class="glyphicon glyphicon-trash"></span></button><br></div><br>{{item.properties.description}}<br>{{item.properties.address}}<br><br></td>
+                <td><div class="row"><img ng-src="Images/{{item.properties.type}}.png"><span id="placeListTitle">{{item.properties.title}}</span><button id="deleteItem" type="button" class="btn btn-danger btn-round" ng-click="removePlace($index)"><span class="glyphicon glyphicon-trash"></span></button><br></div><br>{{item.properties.description}}<br></td>
                 </tr>
               </tbody>
               </table>
