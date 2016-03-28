@@ -172,8 +172,15 @@ app.controller("MapCtrl", ["$scope", "$timeout", function ($scope, $timeout) {
         };
        
         $scope.removePlace = function(index) {
+            var place_ID = $scope.places[index].properties.place_id;
+            console.log("placeidPlaces", place_ID);
+            for (var i = 0; i < $scope.markers.length; i++) {
+                if ($scope.markers[i].id === place_ID) {
+                     var markerToRemove = $scope.markers[i];
+                     map.removeLayer(markerToRemove);
+                }
+            }
             $scope.places.splice(index, 1);
-            //var place_ID = 
         }
     }]);
 
