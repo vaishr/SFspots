@@ -10,6 +10,7 @@
     <link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet' />
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClH_lkoOsbknyTLgw1ogi48K0OnDWJAkc&libraries=places"></script>
     <script src="app.js"></script>
+    <script type="text/javascript" src="leaflet.smoothmarkerbouncing.js" /></script>
     <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link href="style.css" rel="stylesheet" />
   </head>
@@ -68,12 +69,12 @@
               </div>
             </div>
             <div id ="list">
-              <table class="table table-hover">
-              <tbody>
-                <tr ng-repeat="item in places track by $index">
-                <td><div class="row"><img ng-src="Images/{{item.properties.type}}.png"><span id="placeListTitle">{{item.properties.title}}</span><button id="deleteItem" type="button" class="btn btn-danger btn-round" ng-click="removePlace($index)"><span class="glyphicon glyphicon-trash"></span></button><br></div><br>{{item.properties.description}}<br></td>
-                </tr>
-              </tbody>
+              <table class="table">
+                <tbody>
+                  <tr class="table-row" ng-repeat="item in places track by $index" ng-mouseover="animateMarker($index)" ng-mouseout="stopAnimate($index)">
+                  <td><div class="row"><img ng-src="Images/{{item.properties.type}}.png"><span id="placeListTitle" ng-click="openDetails($index)">{{item.properties.title}}</span><button type="button" class="btn btn-danger btn-round deleteItem" ng-click="removePlace($index)"><span class="glyphicon glyphicon-trash"></span></button></div><div id="placeListNote"><q ng-if="item.properties.description">{{item.properties.description}}</q></div><br></td>
+                  </tr>
+                </tbody>
               </table>
             </div>
               </div>

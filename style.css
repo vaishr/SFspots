@@ -1,20 +1,4 @@
-input {
-  color: black;
-}
-
-#list {
-  overflow-y: auto;
-  height: 400px;
-  overflow-x: hidden;
-}
-
-#placeInput {
-  width: 300px;
-}
-
-#placeNote {
-  width: 300px;
-}
+/* Map styles */
 
 #map {
   position: absolute;
@@ -23,10 +7,22 @@ input {
   bottom: 0;
 }
 
-.img-circle {
-  width: 50px;
-  height: 50px;
+.leaflet-bar a {
+  display: inline-block;
 }
+
+
+/* Hide Google and Mapbox logos */
+
+.pac-container:after{
+    content: none !important;
+}
+.mapbox-logo-true {
+  display: none;
+}
+
+
+/* Side panel */
 
 .inputPanel {
   position: fixed;
@@ -37,20 +33,50 @@ input {
   opacity: 1.0;
 }
 
-.btn-round {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    font-size: 12px;
-    float: right;
+
+/* Add Place styles */
+
+input {
+  color: black;
 }
 
-#dropdown {
-  height: 28px;
+#placeInput {
+  width: 300px;
+}
+
+#placeNote {
+  width: 300px;
 }
 
 .help-block {
   color: #DE0032;
+}
+
+
+/* List View styles */
+
+#list {
+  overflow-y: auto;
+  height: 400px;
+  overflow-x: hidden;
+}
+
+#placeListNote {
+  font-style: italic;
+  max-width: 300px;
+}
+
+.img-circle {
+  width: 50px;
+  height: 50px;
+}
+
+.btn-round {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 12px;
+  float: right;
 }
 
 .btn-danger {
@@ -61,9 +87,21 @@ input {
    color: white;
 }
 
+#dropdown {
+  height: 28px;
+}
+
 #placeListTitle {
   padding-left: 18px;
+  padding-top: 10px;
   font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-right: 10px;
+  width: 220px;
+  max-width: 220px;
+  display: inline-block;
+  text-overflow: ellipsis;
 }
 
 .glyphicon {
@@ -79,10 +117,6 @@ input {
   text-transform: uppercase;
 }
 
-.leaflet-bar a {
-  display: inline-block;
-}
-
 .table {
   width: 95%;
 }
@@ -91,11 +125,17 @@ input {
   padding: 18px 0 0 18px;
 }
 
-/* Hide Google and Mapbox logos */
-.pac-container:after{
-    content:none !important;
+.table-row:hover #placeListTitle{
+  text-decoration: underline;
+  color: #448aff;
+  cursor: pointer;
 }
-.mapbox-logo-true {
-  display: none;
+
+.btn .btn-danger .btn-round .deleteItem:hover #placeListTitle {
+    text-decoration: none;
+    color: black;
 }
+
+
+/* Place Details modal styles */
 

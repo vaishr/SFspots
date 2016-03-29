@@ -43,8 +43,8 @@ function templateGeo(place, note, type) {
             "website": place.website,
             "phone_number": place.formatted_phone_number,
             "address": formatAddress(place)
-            //"opening_hours": place.opening_hours.weekday_text,
-            //"images": getPhotos(place)
+            // "opening_hours": place.opening_hours.weekday_text,
+            // "images": getPhotos(place)
         }
     };
 }
@@ -95,7 +95,10 @@ app.controller("MapCtrl", ["$scope", "$timeout", function ($scope, $timeout) {
                         'marker-size': 'large'
                     })
                 });
-
+                newMarker.setBouncingOptions({
+                        bounceHeight : 8,    // height of the bouncing
+                        bounceSpeed  : 30    // bouncing speed coefficient
+                }),
                 newMarker.id = loc.properties.place_id;
 
                 console.log("newMarkerID", newMarker.id);
@@ -103,8 +106,7 @@ app.controller("MapCtrl", ["$scope", "$timeout", function ($scope, $timeout) {
                 
                 var content = "<h2><strong>" + loc.properties.title + "</strong></h2>";
                 if (loc.properties.address) {
-                        content += "<h3>"+ loc.properties.address +"</h3>"
-                }
+                        content += "<h3>"+ loc.properties.address +"</h3>"  }
                 if (note) {
                         content += "<h4><i>" + note + "</i></h4>";
                 }
@@ -116,6 +118,27 @@ app.controller("MapCtrl", ["$scope", "$timeout", function ($scope, $timeout) {
                 newMarker.addTo(map);
                 newMarker.bindPopup(content);
         };
+       
+       $scope.markerAnimate;
+       $scope.markerUnanimate;
+       $scope.animateMarker = function(placeIndex) {
+           var markerID = $scope.places[placeIndex].properties.place_id;
+           for (var i = 0; i < $scope.markers.length; i++) {
+             if ($scope.markers[i].id === markerID) {
+                $scope.markerAnimate = i;
+            }
+            $scope.markers[$scope.markerAnimate].bounce(); 
+           }
+        }
+        $scope.stopAnimate = function(placeIndex) {
+            var markerID = $scope.places[placeIndex].properties.place_id;
+           for (var i = 0; i < $scope.markers.length; i++) {
+             if ($scope.markers[i].id === markerID) {
+                $scope.markerUnanimate = i;
+            }
+            $scope.markers[$scope.markerUnanimate].stopBouncing();  
+           }
+        }
 
         $scope.submit = function () {
             var note = $scope.placeNote;
