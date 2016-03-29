@@ -67,7 +67,7 @@ L.mapbox.accessToken = "pk.eyJ1IjoidmFpcmVkZHkxMSIsImEiOiJhYjVmNmY2MWQ3MmFiNThkZ
 
 var app = angular.module("app", ["firebase"]);
 
-app.controller("MapCtrl", ["$scope", "$timeout", function ($scope, $timeout) {
+app.controller("MapCtrl", ["$scope", "$interval", "$timeout", function ($scope, $timeout) {
         $scope.places = [];
         $scope.markers = [];
         $scope.place = "";
@@ -88,6 +88,7 @@ app.controller("MapCtrl", ["$scope", "$timeout", function ($scope, $timeout) {
             
         }
         $scope.addMarker =  function (loc, note, type) {
+
                 var newMarker = L.marker([loc.geometry.coordinates[0], loc.geometry.coordinates[1]], {
                     icon: L.mapbox.marker.icon({
                         'marker-color': symbols[type],
@@ -96,12 +97,13 @@ app.controller("MapCtrl", ["$scope", "$timeout", function ($scope, $timeout) {
                     })
                 });
                 newMarker.setBouncingOptions({
-                        bounceHeight : 8,    // height of the bouncing
-                        bounceSpeed  : 30    // bouncing speed coefficient
+                        bounceHeight : 8,    
+                        bounceSpeed  : 30    
                 }),
                 newMarker.id = loc.properties.place_id;
 
                 console.log("newMarkerID", newMarker.id);
+                console.log('marker', newMarker);
 
                 
                 var content = "<h2><strong>" + loc.properties.title + "</strong></h2>";
@@ -115,6 +117,7 @@ app.controller("MapCtrl", ["$scope", "$timeout", function ($scope, $timeout) {
 
                 }
                 $scope.markers.push(newMarker);
+                console.log("$scope.markers", $scope.markers);
                 newMarker.addTo(map);
                 newMarker.bindPopup(content);
         };
@@ -122,14 +125,15 @@ app.controller("MapCtrl", ["$scope", "$timeout", function ($scope, $timeout) {
        $scope.markerAnimate;
        $scope.markerUnanimate;
        $scope.animateMarker = function(placeIndex) {
+        console.log("calling animateMarker");
            var markerID = $scope.places[placeIndex].properties.place_id;
            for (var i = 0; i < $scope.markers.length; i++) {
              if ($scope.markers[i].id === markerID) {
                 $scope.markerAnimate = i;
-            }
-            $scope.markers[$scope.markerAnimate].bounce(); 
-           }
+            }     
         }
+        $scope.markers[$scope.markerAnimate].bounce(3);
+        };
         $scope.stopAnimate = function(placeIndex) {
             var markerID = $scope.places[placeIndex].properties.place_id;
            for (var i = 0; i < $scope.markers.length; i++) {
@@ -208,6 +212,8 @@ app.controller("MapCtrl", ["$scope", "$timeout", function ($scope, $timeout) {
 
         
     }]);
+
+
 
 angular.element(document).ready(function () {
     angular.bootstrap(document, [app.name], {
