@@ -1,33 +1,27 @@
-<div>
-    <md-dialog aria-label="popup" ng-cloak>
-        <md-toolbar>
-            <div class="md-toolbar-tools">
-                <h1>{{ctrl.place.properties.title}}</h1>
-                <md-button class="md-icon-button" ng-click="cancel()">
+<md-dialog aria-label="placeDetailsPopup">
+    <div class="container"
+        <div class="row">
+            <img ng-src= "Images/{{ctrl.place.properties.type}}.png">
+            <h1 class="modalTitle">{{ctrl.place.properties.title}}</h1>
+                 <md-dialog-content class="modalBody">
+              <!--   <md-button class="md-icon-button" ng-click="cancel()">
                     <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
-                </md-button>
-            </div>
-        </md-toolbar>
-        <md-dialog-content>
-            <div>
-                <h3>{{ctrl.place.properties.description}}</h3>
+                </md-button> -->
+                <h4>{{ctrl.place.properties.address}}</h4>
+                <h4>{{ctrl.place.properties.phone_number}}</h4>
+                <h4>{{ctrl.place.properties.website}}</h4>
+                <div ng-repeat="day in ctrl.place.openingHours">
+                    <h5>{{day}}</h5>
+                </div>
                 <div ng-if="ctrl.place.photos">
                     <div ng-repeat="photo in ctrl.place.photos track by $index">
-                        <img class="modalPics" ng-src="{{photo}}"> {{photo}}
+                        <img class="modalPics" ng-src="{{photo}}" {{photo}}>
                     </div>
                 </div>
                 <p>
 
                 </p>
-                <p>
-                    It originated in Indian subcontinent (present day India and Pakistan) and Burma. It is the national fruit of India, Pakistan, and the Philippines, and the national tree of Bangladesh. In several cultures, its fruit and leaves are ritually used as floral decorations at weddings, public celebrations, and religious ceremonies.
-                </p>
             </div>
         </md-dialog-content>
-        <md-dialog-actions layout="row">
-            <md-button ng-click="cancel()">
-                Close
-            </md-button>
-        </md-dialog-actions>
-    </md-dialog>
-</div>
+            <md-button ng-click="cancel()">Close</md-button>
+</md-dialog>

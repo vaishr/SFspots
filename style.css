@@ -11,6 +11,9 @@
     display: inline-block;
 }
 
+body {
+  overflow: hidden;
+}
 
 /* Hide Google and Mapbox logos */
 
@@ -58,11 +61,6 @@ input {
 }
 
 
-/* Modals */
-
-{}
-
-
 /* List View styles */
 
 #list {
@@ -74,6 +72,7 @@ input {
 #placeListNote {
     font-style: italic;
     max-width: 300px;
+    cursor: default;
 }
 
 .img-circle {
@@ -94,6 +93,14 @@ input {
 .btn-danger {
     background-color: transparent;
 }
+
+.btn-danger:focus {
+  outline: none;
+}
+
+/*.btn-danger:focus .glyphicon {
+    color: white;
+}*/
 
 .btn-danger:hover .glyphicon {
     color: white;
@@ -136,11 +143,21 @@ input {
     padding: 18px 0 0 18px;
 }
 
-.table-row:hover #placeListTitle {
-    text-decoration: underline;
-    color: #448aff;
-    cursor: pointer;
+#placeListTitle:focus {
+  outline: none;
 }
+
+td:hover .placeLink {
+  cursor: pointer;
+  text-decoration: underline;
+  color: #448aff;
+}
+
+[role="button"] {
+  cursor: default;
+}
+
+
 
 
 /* Place Details modal styles */

@@ -84,7 +84,7 @@
                             <td>
                                 <div class="row">
                                     <img ng-src="Images/{{item.properties.type}}.png">
-                                    <span id="placeListTitle" data-toggle="modal" data-target="#placeModal" ng-click="showAlert($event, $index)">{{item.properties.title}}</span>
+                                    <span id="placeListTitle" data-toggle="modal" data-target="#placeModal" ng-class="{placeLink: hasAdditionalInfo($index)}" ng-click="showAlert($event, $index)">{{item.properties.title}}</span>
                                     <button type="button" class="btn btn-danger btn-round deleteItem" ng-click="removePlace($index)">
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </button>
