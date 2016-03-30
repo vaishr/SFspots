@@ -1,141 +1,146 @@
 /* Map styles */
 
 #map {
-  position: absolute;
-  width: 100%;
-  top: 0;
-  bottom: 0;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: 0;
 }
 
 .leaflet-bar a {
-  display: inline-block;
+    display: inline-block;
 }
 
 
 /* Hide Google and Mapbox logos */
 
-.pac-container:after{
+.pac-container:after {
     content: none !important;
 }
+
 .mapbox-logo-true {
-  display: none;
+    display: none;
 }
 
 
 /* Side panel */
 
 .inputPanel {
-  position: fixed;
-  z-index: 1;
-  height: 100%;
-  background-color:#F5F5F5;
-  padding: 10px;
-  opacity: 1.0;
+    position: fixed;
+    z-index: 1;
+    height: 100%;
+    background-color: #F5F5F5;
+    padding: 10px;
+    opacity: 1.0;
 }
 
 
 /* Add Place styles */
 
 input {
-  color: black;
+    color: black;
 }
 
 #placeInput {
-  width: 300px;
+    width: 300px;
 }
 
 #placeNote {
-  width: 300px;
+    width: 300px;
 }
 
 .help-block {
-  color: #DE0032;
+    color: #DE0032;
 }
+
+.btn-primary {
+    background-color: #E30034;
+}
+
+
+/* Modals */
+
+{}
 
 
 /* List View styles */
 
 #list {
-  overflow-y: auto;
-  height: 400px;
-  overflow-x: hidden;
+    overflow-y: auto;
+    height: 400px;
+    overflow-x: hidden;
 }
 
 #placeListNote {
-  font-style: italic;
-  max-width: 300px;
+    font-style: italic;
+    max-width: 300px;
 }
 
 .img-circle {
-  width: 50px;
-  height: 50px;
+    width: 50px;
+    height: 50px;
 }
 
 .btn-round {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  font-size: 12px;
-  float: right;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 12px;
+    float: right;
+    margin-right: 10px;
+    display: inline-block;
 }
 
 .btn-danger {
-  background-color: transparent;
+    background-color: transparent;
 }
 
 .btn-danger:hover .glyphicon {
-   color: white;
+    color: white;
 }
 
 #dropdown {
-  height: 28px;
+    height: 28px;
 }
 
 #placeListTitle {
-  padding-left: 18px;
-  padding-top: 10px;
-  font-size: 20px;
-  white-space: nowrap;
-  overflow: hidden;
-  margin-right: 10px;
-  width: 220px;
-  max-width: 220px;
-  display: inline-block;
-  text-overflow: ellipsis;
+    padding-left: 18px;
+    padding-top: 10px;
+    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-right: 10px;
+    width: 210px;
+    max-width: 210px;
+    display: inline-block;
+    text-overflow: ellipsis;
 }
 
 .glyphicon {
-  right: 5px;
-  color: #d43f3a;
+    right: 5px;
+    color: #d43f3a;
 }
 
-
 #filter label {
-  float: right;
-  font-weight: normal;
-  font-size: 10px;
-  text-transform: uppercase;
+    float: right;
+    font-weight: normal;
+    font-size: 10px;
+    text-transform: uppercase;
 }
 
 .table {
-  width: 95%;
+    width: 95%;
 }
 
 .table > tbody > tr > td {
-  padding: 18px 0 0 18px;
+    padding: 18px 0 0 18px;
 }
 
-.table-row:hover #placeListTitle{
-  text-decoration: underline;
-  color: #448aff;
-  cursor: pointer;
-}
-
-.btn .btn-danger .btn-round .deleteItem:hover #placeListTitle {
-    text-decoration: none;
-    color: black;
+.table-row:hover #placeListTitle {
+    text-decoration: underline;
+    color: #448aff;
+    cursor: pointer;
 }
 
 
 /* Place Details modal styles */
-

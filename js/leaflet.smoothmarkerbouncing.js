@@ -30,21 +30,22 @@
  *
  * @author Alexei KLENIN <alexey_klenin@hotmail.fr>
  */
-;(function(L) {
+;
+(function(L) {
 
     'use strict';
 
-    var regStyle = /([\w-]+): ([^;]+);/g,    // regex to parse style definitions
+    var regStyle = /([\w-]+): ([^;]+);/g, // regex to parse style definitions
 
         /**
          * CSS3 transform properties for different browsers
          */
         css3_transforms = {
-            transform       : 'transform',
-            WebkitTransform : '-webkit-transform',
-            OTransform      : '-o-transform',
-            MozTransform    : '-moz-transform',
-            msTransform     : '-ms-transform'
+            transform: 'transform',
+            WebkitTransform: '-webkit-transform',
+            OTransform: '-o-transform',
+            MozTransform: '-moz-transform',
+            msTransform: '-ms-transform'
         },
 
         /**
@@ -166,8 +167,8 @@
      * @return array of points [x, y]
      */
     function calculateIconMovePoints(x, y, bounceHeight) {
-        var p = [],                   // array of points
-            dH = bounceHeight + 1;    // delta of height
+        var p = [], // array of points
+            dH = bounceHeight + 1; // delta of height
 
         /* Use fast inverse while loop to fill the array */
         while (dH--) {
@@ -190,7 +191,7 @@
      * @return array of the points [x, y]
      */
     function calculateShadowMovePoints(x, y, bounceHeight, angle) {
-        if (angle != null) {  // important: 0 is not null
+        if (angle != null) { // important: 0 is not null
             return calculateLine(x, y, angle, bounceHeight + 1);
         } else {
             for (var p = [], i = 0; i <= bounceHeight; i++) {
@@ -212,15 +213,14 @@
      * @return array of transformation definitions
      */
     function calculateIconMoveTransforms(x, y, bounceHeight) {
-        var t = [],                 // array of transformations
-            dY = bounceHeight + 1;  // delta Y
+        var t = [], // array of transformations
+            dY = bounceHeight + 1; // delta Y
 
         /* Use fast inverse while loop to fill the array */
         while (dY--) {
 
             /* Use matrix3d for hardware acceleration */
-            t[dY] = ' matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,' + x + ',' + (y - dY)
-                + ',0,1) ';
+            t[dY] = ' matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,' + x + ',' + (y - dY) + ',0,1) ';
         }
 
         return t;
@@ -241,10 +241,10 @@
      */
     function calculateShadowMoveTransforms(x, y, bounceHeight, angle) {
         // TODO: check this method to know if bounceHeight + 1 is normal
-        var t = [],                   // array of transformation definitions
-            dY = bounceHeight + 1;    // delta Y
+        var t = [], // array of transformation definitions
+            dY = bounceHeight + 1; // delta Y
 
-        if (angle != null) {  // important: 0 is not null
+        if (angle != null) { // important: 0 is not null
             var p = calculateLine(x, y, angle, bounceHeight + 1);
         } else {
             for (var p = [], i = 0; i <= bounceHeight; i++) {
@@ -256,8 +256,7 @@
         while (dY--) {
 
             /* Use matrix3d for hardware acceleration */
-            t[dY] = ' matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,' + p[dY][0] + ','
-                + p[dY][1] + ',0,1) ';
+            t[dY] = ' matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,' + p[dY][0] + ',' + p[dY][1] + ',0,1) ';
         }
 
         return t;
@@ -276,15 +275,14 @@
      * @return array of transformation definitions
      */
     function calculateIconResizeTransforms(x, y, height, contractHeight) {
-        var t = [],                     // array of transformations
-            dH = contractHeight + 1;    // delta of height
+        var t = [], // array of transformations
+            dH = contractHeight + 1; // delta of height
 
         /* Use fast inverse while loop to fill the array */
         while (dH--) {
 
             /* Use matrix3d for hardware acceleration */
-            t[dH] = ' matrix3d(1,0,0,0,0,' + ((height - dH) / height)
-                + ',0,0,0,0,1,0,' + x + ',' + (y + dH) + ',0,1) ';
+            t[dH] = ' matrix3d(1,0,0,0,0,' + ((height - dH) / height) + ',0,0,0,0,1,0,' + x + ',' + (y + dH) + ',0,1) ';
         }
 
         return t;
@@ -306,18 +304,16 @@
      */
     // TODO: fix & deploy this function
     function calculateShadowResizeTransforms(x, y, width, height,
-            contractHeight, angle) {
-        var t = [],                     // array of transformation definitions
+        contractHeight, angle) {
+        var t = [], // array of transformation definitions
             p = calculateLine(width, height, angle + Math.PI, contractHeight),
-            dH = contractHeight + 1;    // delta height
+            dH = contractHeight + 1; // delta height
 
         /* Use fast inverse while loop to fill the array */
         while (dH--) {
 
             /* Use matrix3d for hardware acceleration */
-            t[dH] = ' matrix3d(' + (width / p[dH][0]) +  ',0,0,0,0,'
-                + (p[dH][1] / height) + ',0,0,0,0,1,0,' + x + ','
-                + (y + height - p[dH][1]) + ',0,1) ';
+            t[dH] = ' matrix3d(' + (width / p[dH][0]) + ',0,0,0,0,' + (p[dH][1] / height) + ',0,0,0,0,1,0,' + x + ',' + (y + height - p[dH][1]) + ',0,1) ';
         }
 
         return t;
@@ -381,8 +377,8 @@
      */
     function calculateDelays(height, speed, prefix) {
         var key = prefix + height + '_' + speed,
-            deltas = [],    // time between steps of animation
-            delays = [],    // delays before steps from beginning of animation
+            deltas = [], // time between steps of animation
+            delays = [], // delays before steps from beginning of animation
             totalDelay = 0,
             l,
             i;
@@ -426,7 +422,7 @@
      * -------------------------------------------------------------------------
      */
 
-    L.Marker._bouncingMarkers = [];     // array of bouncing markers
+    L.Marker._bouncingMarkers = []; // array of bouncing markers
 
     /**
      * Registers default options of bouncing animation.
@@ -453,7 +449,7 @@
     L.Marker.stopAllBouncingMarkers = function() {
         var marker;
         while (marker = L.Marker._bouncingMarkers.shift()) {
-            marker._bouncingMotion.isBouncing = false;    // stop bouncing
+            marker._bouncingMotion.isBouncing = false; // stop bouncing
         }
     };
 
@@ -502,7 +498,7 @@
             while (i--) {
                 if (L.Marker._bouncingMarkers[i]._bouncingOptions.exclusive) {
                     L.Marker._bouncingMarkers[i]._bouncingMotion.isBouncing =
-                        false;    // stop bouncing
+                        false; // stop bouncing
                     L.Marker._bouncingMarkers.splice(i, 1);
                 }
             }
@@ -518,15 +514,15 @@
 
         /* Default bouncing animation properties */
         _bouncingOptions: {
-            bounceHeight   : 15,    // how high marker can bounce (px)
-            contractHeight : 12,    // how much marker can contract (px)
-            bounceSpeed    : 52,    // bouncing speed coefficient
-            contractSpeed  : 52,    // contracting speed coefficient
-            shadowAngle    : - Math.PI / 4, // shadow inclination angle
-                                            // (radians); null value annulates
-                                            // shadow movement
-            elastic        : true,  // activate contract animation
-            exclusive      : false, // many markers can bounce in the same time
+            bounceHeight: 15, // how high marker can bounce (px)
+            contractHeight: 12, // how much marker can contract (px)
+            bounceSpeed: 52, // bouncing speed coefficient
+            contractSpeed: 52, // contracting speed coefficient
+            shadowAngle: -Math.PI / 4, // shadow inclination angle
+            // (radians); null value annulates
+            // shadow movement
+            elastic: true, // activate contract animation
+            exclusive: false, // many markers can bounce in the same time
         },
 
         /**
@@ -545,8 +541,7 @@
              * own property and clone _bouncingOptions of prototype.
              */
             if (!this.hasOwnProperty('_bouncingOptions')) {
-                this._bouncingOptions = L.extend(
-                    {},
+                this._bouncingOptions = L.extend({},
                     L.Marker.prototype._bouncingOptions
                 );
             }
@@ -560,7 +555,7 @@
             /* Recalculate transformations */
             this._calculateTransforms();
 
-            return this;    // fluent API
+            return this; // fluent API
         },
 
         /**
@@ -582,35 +577,35 @@
          */
         bounce: function() {
             var marker = this,
-                icon   = this._icon,
+                icon = this._icon,
                 shadow = this._shadow,
 
                 bouncingOptions = marker._bouncingOptions,
-                motion          = marker._bouncingMotion,
+                motion = marker._bouncingMotion,
 
-                bounceHeight   = bouncingOptions.bounceHeight,
+                bounceHeight = bouncingOptions.bounceHeight,
                 contractHeight = bouncingOptions.contractHeight,
-                bounceSpeed    = bouncingOptions.bounceSpeed,
-                contractSpeed  = bouncingOptions.contractSpeed,
-                shadowAngle    = bouncingOptions.shadowAngle,
-                elastic        = bouncingOptions.elastic,
-                exclusive      = bouncingOptions.exclusive,
+                bounceSpeed = bouncingOptions.bounceSpeed,
+                contractSpeed = bouncingOptions.contractSpeed,
+                shadowAngle = bouncingOptions.shadowAngle,
+                elastic = bouncingOptions.elastic,
+                exclusive = bouncingOptions.exclusive,
 
-                moveSteps    = motion.moveSteps,
-                moveDelays   = motion.moveDelays,
-                resizeSteps  = motion.resizeSteps,
+                moveSteps = motion.moveSteps,
+                moveDelays = motion.moveDelays,
+                resizeSteps = motion.resizeSteps,
                 resizeDelays = motion.resizeDelays,
 
-                nbMoveSteps   = moveSteps.length,
+                nbMoveSteps = moveSteps.length,
                 nbResizeSteps = resizeSteps.length,
 
-                baseIconCssText   = motion.baseIconCssText,
+                baseIconCssText = motion.baseIconCssText,
                 baseShadowCssText = motion.baseShadowCssText,
 
-                is3d      = L.Browser.any3d,
+                is3d = L.Browser.any3d,
                 // transform = L.DomUtil.TRANSFORM,
 
-                times = null;    // null for infinite bouncing
+                times = null; // null for infinite bouncing
 
             if (arguments.length == 1) {
                 times = arguments[0];
@@ -624,15 +619,11 @@
             function makeMoveStep(step) {
 
                 /* Reset icon's cssText */
-                icon.style.cssText = baseIconCssText
-                    + 'z-index: ' + marker._zIndex + ';'
-                    + transform + ': ' + motion.iconMoveTransforms[step];
+                icon.style.cssText = baseIconCssText + 'z-index: ' + marker._zIndex + ';' + transform + ': ' + motion.iconMoveTransforms[step];
 
                 /* Reset shadow's cssText */
                 if (shadow) {
-                    shadow.style.cssText = baseShadowCssText
-                        + transform + ': '
-                        + motion.shadowMoveTransforms[step];
+                    shadow.style.cssText = baseShadowCssText + transform + ': ' + motion.shadowMoveTransforms[step];
                 }
             }
 
@@ -645,16 +636,15 @@
             function makeMoveStepNo3D(step) {
 
                 /* Reset icon's cssText */
-                icon.style.cssText = baseIconCssText
-                    + 'z-index: ' + marker._zIndex + ';';
+                icon.style.cssText = baseIconCssText + 'z-index: ' + marker._zIndex + ';';
                 icon.style.left = motion.iconMovePoints[step][0] + 'px';
-                icon.style.top  = motion.iconMovePoints[step][1] + 'px';
+                icon.style.top = motion.iconMovePoints[step][1] + 'px';
 
                 /* Reset shadow's cssText */
                 if (shadow) {
                     shadow.style.cssText = baseShadowCssText;
                     shadow.style.left = motion.shadowMovePoints[step][0] + 'px';
-                    shadow.style.top  = motion.shadowMovePoints[step][1] + 'px';
+                    shadow.style.top = motion.shadowMovePoints[step][1] + 'px';
                 }
             }
 
@@ -666,15 +656,11 @@
             function makeResizeStep(step) {
 
                 /* Reset icon's cssText */
-                icon.style.cssText = baseIconCssText
-                    + 'z-index: ' + marker._zIndex + ';'
-                    + transform + ': ' + motion.iconResizeTransforms[step];
+                icon.style.cssText = baseIconCssText + 'z-index: ' + marker._zIndex + ';' + transform + ': ' + motion.iconResizeTransforms[step];
 
                 /* Reset shadow's cssText */
                 if (shadow && shadowAngle != null) {
-                    shadow.style.cssText = baseShadowCssText
-                        + transform + ': '
-                        + motion.shadowResizeTransforms[step];
+                    shadow.style.cssText = baseShadowCssText + transform + ': ' + motion.shadowResizeTransforms[step];
                 }
             }
 
@@ -684,7 +670,7 @@
             function move() {
                 if (times !== null) {
                     if (!--times) {
-                        motion.isBouncing = false;  // this is the last bouncing
+                        motion.isBouncing = false; // this is the last bouncing
                     }
                 }
 
@@ -713,7 +699,7 @@
                 // TODO: longer timeout if there is not resize part of animation
                 setTimeout(function() {
                     if (elastic && is3d) {
-                        resize();    // possible only in 3D able browsers
+                        resize(); // possible only in 3D able browsers
                     } else if (motion.isBouncing) {
                         setTimeout(move, bounceSpeed);
                     }
@@ -746,9 +732,9 @@
 
             motion.isBouncing = true;
             L.Marker._addBouncingMarker(marker, exclusive);
-            move();        // start animation
+            move(); // start animation
 
-            return marker;    // fluent API
+            return marker; // fluent API
         },
 
         /**
@@ -763,7 +749,7 @@
             this._bouncingMotion.isBouncing = false;
             L.Marker._removeBouncingMarker(this);
 
-            return this;    // fluent API
+            return this; // fluent API
         },
 
         /**
@@ -778,7 +764,7 @@
                 this.bounce();
             }
 
-            return this;    // fluent API
+            return this; // fluent API
         },
 
         /**
@@ -943,14 +929,14 @@
 
         /* Create base cssText */
         var styles = parseCssText(this._icon.style.cssText);
-        delete styles[transform];    // delete old trasform style definition
-        delete styles['z-index'];    // delete old z-index
+        delete styles[transform]; // delete old trasform style definition
+        delete styles['z-index']; // delete old z-index
         this._bouncingMotion.baseIconCssText = renderCssText(styles);
 
         /* Create base cssText for shadow */
         if (this._shadow) {
             styles = parseCssText(this._shadow.style.cssText);
-            delete styles[transform];    // delete old trasform style definition
+            delete styles[transform]; // delete old trasform style definition
             this._bouncingMotion.baseShadowCssText = renderCssText(styles);
         }
     };

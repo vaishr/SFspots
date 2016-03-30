@@ -1,87 +1,108 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/firebase/firebase.js"></script>
-    <script src="bower_components/angularfire/dist/angularfire.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script>
-    <link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet' />
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClH_lkoOsbknyTLgw1ogi48K0OnDWJAkc&libraries=places"></script>
-    <script src="app.js"></script>
-    <script type="text/javascript" src="js/leaflet.smoothmarkerbouncing.js" /></script> 
-    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />   
-    <link href="style.css" rel="stylesheet" />
-  </head>
-  <body>
-    <div ng-controller="MapCtrl">
-      <div class="inputPanel">
-        <h4>Add Place to Map</h4>
-          <div id = "placeEnter">
-            <input class="form-control" id="placeInput" type="text" ng-model="place">
-             <span ng-if="noLocationErr" class="help-block">Please enter a place </span>
-             <span ng-if="repeatPlace" class="help-block"> This place is already on your list </span>
-          </div>
-            <textarea class="form-control" id="placeNote" rows="3" ng-model="placeNote" placeholder="Add a note about the place"></textarea><br>
-          <select name = "dropdown" id="dropdownSubmit" class="form-control" ng-model="placeType">
-                  <option value=""></option>
-                  <option value="restaurant">Food</option>
-                  <option value="cafe">Coffee</option>
-                  <option value="park">Nature</option>
-                  <option value="pitch">Active</option>
-                  <option value="bar">Nightlife</option>
-                  <option value="theatre">Arts</option>
-                  <option value="shop">Shopping</option>
-                  <option value="camera">Tourist</option>
-                  <option value="roadblock">Avoid</option>
-                  <option value="star">Other</option>
-        </select>
-         <br>
-         <div class = "container-fluid">
-          <div class = "row">
-            <div class = "col-xs-5"><a href="#" ng-click="resetMap()">Reset Map View</a></div>
-            <div class = "col-xs-3"></div>
-              <input class = "col-xs-4 btn btn-primary" id="add" type="submit" value="Submit" ng-click="submit()">
-          </div>
-          </div>
-            <br><br>
-            <div class = "row">
-              <div class = "col-md-5">
-              <h3>Your Places</h3>
-              </div>
-              <div class = "col-md-2"></div>
-            <div class = "col-md-5" id="filter">
-             <label for="dropdown">Filter By: </label>
-                <select name = "dropdown" id="dropdown" class="form-control" ng-model="filterType" ng-change="filter()">
-                  <option value=""></option>
-                  <option value="restaurant">Food</option>
-                  <option value="cafe">Coffee</option>
-                  <option value="park">Nature</option>
-                  <option value="pitch">Active</option>
-                  <option value="bar">Nightlife</option>
-                  <option value="theatre">Arts</option>
-                  <option value="shop">Shopping</option>
-                  <option value="camera">Tourist</option>
-                  <option value="roadblock">Avoid</option>
-                  <option value="star">Other</option>
-                </select>
-              </div>
-            </div>
-            <div id ="list">
-              <table class="table">
-                <tbody>
-                  <tr class="table-row" ng-repeat="item in places track by $index" ng-mouseenter="animateMarker($index)" ng-mouseleave="stopAnimate($index)">
-                  <td><div class="row"><img ng-src="Images/{{item.properties.type}}.png"><span id="placeListTitle" data-toggle="modal" data-target="#myModal" ng-click="openDetails($index)">{{item.properties.title}}</span><button type="button" class="btn btn-danger btn-round deleteItem" ng-click="removePlace($index)"><span class="glyphicon glyphicon-trash"></span></button></div><div id="placeListNote"><q ng-if="item.properties.description">{{item.properties.description}}</q></div><br></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-              </div>
-      <div>
-        <div id="map">Map</div>
-      </div>
 
+<head>
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="bower_components/firebase/firebase.js"></script>
+    <script type="text/javascript" src="bower_components/angularfire/dist/angularfire.js"></script>
+    <script type="text/javascript" src="bower_components/angular-material/angular-material.js"></script>
+    <script type="text/javascript" src="bower_components/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript" src="bower_components/angular-aria/angular-aria.js"></script>
+    <script type="text/javascript" src="bower_components/angular-material/angular-material.js"></script>
+    <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet' />
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClH_lkoOsbknyTLgw1ogi48K0OnDWJAkc&libraries=places"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/leaflet.smoothmarkerbouncing.js" /></script>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="bower_components/angular-material/angular-material.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div ng-controller="AppCtrl">
+        <div class="inputPanel">
+            <h4>Add Place to Map</h4>
+            <div id="placeEnter">
+                <input class="form-control" id="placeInput" type="text" ng-model="place">
+                <span ng-if="noLocationErr" class="help-block">Please enter a valid address or place </span>
+                <span ng-if="repeatPlace" class="help-block"> This place is already on your list </span>
+            </div>
+            <textarea class="form-control" id="placeNote" rows="3" ng-model="placeNote" placeholder="Add a note about the place"></textarea>
+            <br>
+            <select name="dropdown" id="dropdownSubmit" class="form-control" ng-model="placeType">
+                <option value=""></option>
+                <option value="restaurant">Food</option>
+                <option value="cafe">Coffee</option>
+                <option value="park">Nature</option>
+                <option value="pitch">Active</option>
+                <option value="bar">Nightlife</option>
+                <option value="theatre">Arts</option>
+                <option value="shop">Shopping</option>
+                <option value="camera">Tourist</option>
+                <option value="roadblock">Avoid</option>
+                <option value="star">Other</option>
+            </select>
+            <br>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-5"><a href="#" ng-click="resetMap()">Reset Map View</a></div>
+                    <div class="col-xs-3"></div>
+                    <input class="col-xs-4 btn btn-primary" id="add" type="submit" value="Submit" ng-click="submit()">
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-md-5">
+                    <h3>Your Places</h3>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-5" id="filter">
+                    <label for="dropdown">Filter By: </label>
+                    <select name="dropdown" id="dropdown" class="form-control" ng-model="filterType" ng-change="filter()">
+                        <option value=""></option>
+                        <option value="restaurant">Food</option>
+                        <option value="cafe">Coffee</option>
+                        <option value="park">Nature</option>
+                        <option value="pitch">Active</option>
+                        <option value="bar">Nightlife</option>
+                        <option value="theatre">Arts</option>
+                        <option value="shop">Shopping</option>
+                        <option value="camera">Tourist</option>
+                        <option value="roadblock">Avoid</option>
+                        <option value="star">Other</option>
+                    </select>
+                </div>
+            </div>
+            <div id="list">
+                <table class="table">
+                    <tbody>
+                        <tr class="table-row" ng-repeat="item in places track by $index" ng-mouseenter="animateMarker($index)" ng-mouseleave="stopAnimate($index)">
+                            <td>
+                                <div class="row">
+                                    <img ng-src="Images/{{item.properties.type}}.png">
+                                    <span id="placeListTitle" data-toggle="modal" data-target="#placeModal" ng-click="showAlert($event, $index)">{{item.properties.title}}</span>
+                                    <button type="button" class="btn btn-danger btn-round deleteItem" ng-click="removePlace($index)">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                </div>
+                                <div id="placeListNote">
+                                    <q ng-if="item.properties.description">{{item.properties.description}}</q>
+                                </div>
+                                <br>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div>
+            <div id="map">Map</div>
+        </div>
     </div>
-  </body>
+</body>
+
 </html>
