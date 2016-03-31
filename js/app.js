@@ -92,7 +92,7 @@ var symbols = {
 
 L.mapbox.accessToken = "pk.eyJ1IjoidmFpcmVkZHkxMSIsImEiOiJhYjVmNmY2MWQ3MmFiNThkZjBiZTA1MzdkNTg3NTJhZiJ9.6YTxS5LbsOmXzVcUWzgE7w";
 
-var app = angular.module("app", ["firebase", "ngMaterial"]);
+var app = angular.module("app", ["ngMaterial"]);
 
 app.controller("AppCtrl", ["$scope", "$mdDialog", "$mdMedia", function($scope, $mdDialog, $mdMedia) {
     //storage for added places
