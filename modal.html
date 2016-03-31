@@ -1,27 +1,24 @@
 <md-dialog aria-label="placeDetailsPopup">
-    <div class="container"
-        <div class="row">
-            <img ng-src= "Images/{{ctrl.place.properties.type}}.png">
+    <img ng-click="cancel()" id="closeIcon" ng-src="Images/Close-popup-icon.png" aria-label="Close dialog">
+    <div class
+    <div class="titleModal">
+            <img class="typeIcon" ng-src="Images/{{ctrl.place.properties.type}}.png">
             <h1 class="modalTitle">{{ctrl.place.properties.title}}</h1>
-                 <md-dialog-content class="modalBody">
-              <!--   <md-button class="md-icon-button" ng-click="cancel()">
-                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
-                </md-button> -->
-                <h4>{{ctrl.place.properties.address}}</h4>
-                <h4>{{ctrl.place.properties.phone_number}}</h4>
-                <h4>{{ctrl.place.properties.website}}</h4>
-                <div ng-repeat="day in ctrl.place.openingHours">
-                    <h5>{{day}}</h5>
-                </div>
-                <div ng-if="ctrl.place.photos">
-                    <div ng-repeat="photo in ctrl.place.photos track by $index">
-                        <img class="modalPics" ng-src="{{photo}}" {{photo}}>
-                    </div>
-                </div>
-                <p>
-
-                </p>
+    </div>
+        <md-dialog-content class="modalBody">
+            <h4 class="modalAddress">{{ctrl.place.properties.address}}</h4>
+            <h4 class="modalPhone">{{ctrl.place.properties.phone_number}}</h4>
+            <a href="{{ctrl.place.properties.website}}"><h5>{{ctrl.place.properties.website}}</h5></a>
+            <br>
+            <h5 class="openingHrs" ng-if="ctrl.place.openingHours"><strong id="openingHrsTitle">Opening Hours</strong></h5>
+            <div ng-repeat="day in ctrl.place.openingHours">
+                <p>{{day}}</p>
             </div>
-        </md-dialog-content>
-            <md-button ng-click="cancel()">Close</md-button>
+            <br>
+            <div ng-if="ctrl.place.photos">
+                <div ng-repeat="photo in ctrl.place.photos track by $index">
+                   <img class="modalPics img-responsive" ng-src="{{photo}}" {{photo}}>
+                </div>
+            </div>
+    </md-dialog-content>
 </md-dialog>

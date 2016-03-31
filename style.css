@@ -1,4 +1,4 @@
-/* Map styles */
+/* Map */
 
 #map {
     position: absolute;
@@ -7,13 +7,19 @@
     bottom: 0;
 }
 
-.leaflet-bar a {
-    display: inline-block;
+body {
+    overflow: hidden;
 }
 
-body {
-  overflow: hidden;
+.leaflet-left .leaflet-control {
+    margin-left: 331px;
+    background-color: transparent;
 }
+
+.leaflet-top {
+    z-index: inherit;
+}
+
 
 /* Hide Google and Mapbox logos */
 
@@ -38,16 +44,13 @@ body {
 }
 
 
-/* Add Place styles */
+/* Add Place */
 
 input {
     color: black;
 }
 
-#placeInput {
-    width: 300px;
-}
-
+#placeInput,
 #placeNote {
     width: 300px;
 }
@@ -56,12 +59,36 @@ input {
     color: #DE0032;
 }
 
-.btn-primary {
-    background-color: #E30034;
+#addBtn {
+  background-color: #00e676;
+  color: white;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-left: 10px;
 }
 
+#addBtn:focus {
+  outline: none;
+}
 
-/* List View styles */
+#addBtn:hover {
+  background-color: transparent;
+  color: #00e676;
+  border: 1px solid #00e676;
+}
+
+#innerResetMap {
+  margin-top: 14px;
+}
+
+#addPlaceActions {
+  padding-left: 5px;
+  padding-right: 0px;
+  margin-top: 6px;
+}
+
+/* List View */
 
 #list {
     overflow-y: auto;
@@ -95,12 +122,8 @@ input {
 }
 
 .btn-danger:focus {
-  outline: none;
+    outline: none;
 }
-
-/*.btn-danger:focus .glyphicon {
-    color: white;
-}*/
 
 .btn-danger:hover .glyphicon {
     color: white;
@@ -128,8 +151,7 @@ input {
     color: #d43f3a;
 }
 
-#filter label {
-    float: right;
+label {
     font-weight: normal;
     font-size: 10px;
     text-transform: uppercase;
@@ -144,20 +166,68 @@ input {
 }
 
 #placeListTitle:focus {
-  outline: none;
+    outline: none;
 }
 
 td:hover .placeLink {
-  cursor: pointer;
-  text-decoration: underline;
-  color: #448aff;
+    cursor: pointer;
+    text-decoration: underline;
+    color: #448aff;
 }
 
 [role="button"] {
-  cursor: default;
+    cursor: default;
 }
 
 
+/* Place Details Popup */
 
+md-dialog {
+    padding: 40px;
+    background-color: #F5F5F5;
+    border-radius: 6px;
+    width: 65%;
+    box-shadow: none;
+}
 
-/* Place Details modal styles */
+.md-button {
+  text-transform: none;
+}
+
+.modalPics {
+    width: 60%;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+#closeIcon {
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  right: 30px;
+  display: block;
+  cursor: pointer;
+}
+
+.openingHrs {
+    margin-top: 20px;
+}
+
+.modalTitle {
+  margin-top: 0px;
+}
+
+.titleModal {
+  display: inline-block;
+  margin-bottom: 30px;
+  margin-top: 20px;
+
+}
+
+#openingHrsTitle, .modalPhone, .modalAddress {
+  color: #616161;
+}
+
+.typeIcon {
+  margin-top: 30px;
+}

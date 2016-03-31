@@ -1,31 +1,31 @@
 {
-  "name": "SFspots",
-  "version": "0.0.0",
-  "description": "",
-  "main": "Gruntfile.js",
-  "dependencies": {
-    "bower": "~1.7.7",
-    "grunt-cli": "~1.1.0",
-    "grunt-jsbeautifier": "~0.2.10",
-    "lite-server": "~2.1.0"
-  },
-  "devDependencies": {
-    "grunt-cli": "^1.1.0",
-    "grunt": "^0.4.5",
-    "load-grunt-tasks": "^3.4.1",
-    "grunt-contrib-jshint": "^1.0.0"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/vaishr/SFspots.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/vaishr/SFspots/issues"
-  },
-  "homepage": "https://github.com/vaishr/SFspots"
+    "name": "SFspots",
+    "version": "0.0.0",
+    "description": "",
+    "main": "Gruntfile.js",
+    "dependencies": {
+        "bower": "~1.7.7",
+        "grunt-cli": "~1.1.0",
+        "grunt-jsbeautifier": "~0.2.10",
+        "lite-server": "~2.1.0"
+    },
+    "devDependencies": {
+        "grunt-cli": "^1.1.0",
+        "grunt": "^0.4.5",
+        "load-grunt-tasks": "^3.4.1",
+        "grunt-contrib-jshint": "^1.0.0"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/vaishr/SFspots.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/vaishr/SFspots/issues"
+    },
+    "homepage": "https://github.com/vaishr/SFspots"
 }

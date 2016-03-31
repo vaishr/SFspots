@@ -62,8 +62,9 @@ var templateGeo = function(place, note, type) {
     var openHours = function(place) {
         if (!place.opening_hours) {
             return;
-        }
-        else { placeTemplate.openingHours = place.opening_hours.weekday_text };
+        } else {
+            placeTemplate.openingHours = place.opening_hours.weekday_text
+        };
     }
 
     placePhotos(place);
@@ -108,7 +109,7 @@ app.controller("AppCtrl", ["$scope", "$mdDialog", "$mdMedia", function($scope, $
         //add mapbox map
         map = L.mapbox.map("map", "mapbox.wheatpaste", {
             attributionControl: false
-        }).addControl(L.mapbox.shareControl());;
+        });
         //set view to san francisco 
         map.setView([37.763, -122.482], 13);
         var myLayer = L.mapbox.featureLayer().addTo(map);
@@ -129,7 +130,7 @@ app.controller("AppCtrl", ["$scope", "$mdDialog", "$mdMedia", function($scope, $
         if (place.properties.phone_number || place.properties.website || place.photos) {
             return true;
         }
-    return false;
+        return false;
     }
 
     $scope.addMarker = function(loc, note, type) {
@@ -155,7 +156,7 @@ app.controller("AppCtrl", ["$scope", "$mdDialog", "$mdMedia", function($scope, $
             content += "<h3>" + loc.properties.address + "</h3>"
         }
         if (note) {
-            content += "<h4><i>" + note + "</i></h4>";
+            content += "<p><i>" + note + "</i></p>";
         }
         $scope.markers.push(newMarker);
         console.log("$scope.markers", $scope.markers);
@@ -283,9 +284,6 @@ app.controller("AppCtrl", ["$scope", "$mdDialog", "$mdMedia", function($scope, $
 }]);
 
 app.controller("DialogCtrl", ["$scope", "$mdDialog", function($scope, $mdDialog) {
-    $scope.hide = function() {
-        $mdDialog.hide();
-    };
     $scope.cancel = function() {
         $mdDialog.cancel();
     };
