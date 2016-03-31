@@ -60,33 +60,34 @@ input {
 }
 
 #addBtn {
-  background-color: #00e676;
-  color: white;
-  border-radius: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-left: 10px;
+    background-color: #00e676;
+    color: white;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-left: 10px;
 }
 
 #addBtn:focus {
-  outline: none;
+    outline: none;
 }
 
 #addBtn:hover {
-  background-color: transparent;
-  color: #00e676;
-  border: 1px solid #00e676;
+    background-color: transparent;
+    color: #00e676;
+    border: 1px solid #00e676;
 }
 
 #innerResetMap {
-  margin-top: 14px;
+    margin-top: 14px;
 }
 
 #addPlaceActions {
-  padding-left: 5px;
-  padding-right: 0px;
-  margin-top: 6px;
+    padding-left: 5px;
+    padding-right: 0px;
+    margin-top: 6px;
 }
+
 
 /* List View */
 
@@ -191,7 +192,7 @@ md-dialog {
 }
 
 .md-button {
-  text-transform: none;
+    text-transform: none;
 }
 
 .modalPics {
@@ -201,12 +202,12 @@ md-dialog {
 }
 
 #closeIcon {
-  height: 20px;
-  width: 20px;
-  position: absolute;
-  right: 30px;
-  display: block;
-  cursor: pointer;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    right: 30px;
+    display: block;
+    cursor: pointer;
 }
 
 .openingHrs {
@@ -214,20 +215,21 @@ md-dialog {
 }
 
 .modalTitle {
-  margin-top: 0px;
+    margin-top: 0px;
 }
 
 .titleModal {
-  display: inline-block;
-  margin-bottom: 30px;
-  margin-top: 20px;
-
+    display: inline-block;
+    margin-bottom: 30px;
+    margin-top: 20px;
 }
 
-#openingHrsTitle, .modalPhone, .modalAddress {
-  color: #616161;
+#openingHrsTitle,
+.modalPhone,
+.modalAddress {
+    color: #616161;
 }
 
 .typeIcon {
-  margin-top: 30px;
+    margin-top: 30px;
 }

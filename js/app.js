@@ -1,6 +1,5 @@
 //google places autocomplete
 var autocomplete;
-
 //mapbox map
 var map;
 
@@ -122,9 +121,8 @@ app.controller("AppCtrl", ["$scope", "$mdDialog", "$mdMedia", function($scope, $
     $scope.resetMap = function() {
         map.setView([37.763, -122.482], 13);
     }
-    $scope.filter = function() {
 
-    }
+    //check if place has additional info, used to determine if place should have details popup
     $scope.hasAdditionalInfo = function(placeIndex) {
         var place = $scope.places[placeIndex];
         if (place.properties.phone_number || place.properties.website || place.photos) {
@@ -133,6 +131,7 @@ app.controller("AppCtrl", ["$scope", "$mdDialog", "$mdMedia", function($scope, $
         return false;
     }
 
+    //add marker to map 
     $scope.addMarker = function(loc, note, type) {
         var newMarker = L.marker([loc.geometry.coordinates[0], loc.geometry.coordinates[1]], {
             icon: L.mapbox.marker.icon({
@@ -141,15 +140,15 @@ app.controller("AppCtrl", ["$scope", "$mdDialog", "$mdMedia", function($scope, $
                 'marker-size': 'large'
             })
         });
+        //uses smoothmarkerbouncing leaflet plugin
         newMarker.setBouncingOptions({
-                bounceHeight: 8,
-                bounceSpeed: 30
-            }),
-            newMarker.id = loc.properties.place_id;
+            bounceHeight: 8,
+            bounceSpeed: 30
+        });
+        newMarker.id = loc.properties.place_id;
 
         console.log("newMarkerID", newMarker.id);
         console.log('marker', newMarker);
-
 
         var content = "<h2><strong>" + loc.properties.title + "</strong></h2>";
         if (loc.properties.address) {
@@ -200,6 +199,7 @@ app.controller("AppCtrl", ["$scope", "$mdDialog", "$mdMedia", function($scope, $
         console.log('place', place);
         console.log('$scope.place', $scope.place);
 
+        //form validations on Add New Place
         function checkErr() {
             $scope.repeatPlace = false;
             $scope.noLocationErr = false;
@@ -220,8 +220,7 @@ app.controller("AppCtrl", ["$scope", "$mdDialog", "$mdMedia", function($scope, $
             return false;
         }
 
-
-
+        //if no validation errors, add place to list
         if (!checkErr()) {
             var newPlace = templateGeo(place, note, type);
             $scope.addMarker(newPlace, note, type);
@@ -229,21 +228,15 @@ app.controller("AppCtrl", ["$scope", "$mdDialog", "$mdMedia", function($scope, $
             $scope.repeatPlace = false;
             $scope.places.push(newPlace);
             $scope.place = "";
-
-
-            // if (!newPlace.properties.images.length) {
-            //     $scope.hasImage = false;
-            // }
-            // if (newPlace.properties.images.length > 0) {
-            //     $scope.hasImage = true;
-            // }
         }
 
+        //reset input fields to defaults
         $scope.placeNote = "";
         $scope.placeType = "star";
         place = undefined;
     };
 
+    //delete place from map and list
     $scope.removePlace = function(index) {
         var place_ID = $scope.places[index].properties.place_id;
         for (var i = 0; i < $scope.markers.length; i++) {
@@ -255,6 +248,7 @@ app.controller("AppCtrl", ["$scope", "$mdDialog", "$mdMedia", function($scope, $
         $scope.places.splice(index, 1);
     };
 
+    //open modals if place has more information
     $scope.showAlert = function(ev, placeIndex) {
         if ($scope.hasAdditionalInfo(placeIndex)) {
             var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
@@ -279,10 +273,9 @@ app.controller("AppCtrl", ["$scope", "$mdDialog", "$mdMedia", function($scope, $
             $scope.customFullscreen = (wantsFullScreen === true);
         });
     };
-
-
 }]);
 
+//modal controller
 app.controller("DialogCtrl", ["$scope", "$mdDialog", function($scope, $mdDialog) {
     $scope.cancel = function() {
         $mdDialog.cancel();

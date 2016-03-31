@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
-    <script type="text/javascript" src="bower_components/firebase/firebase.js"></script>
-    <script type="text/javascript" src="bower_components/angularfire/dist/angularfire.js"></script>
     <script type="text/javascript" src="bower_components/angular-material/angular-material.js"></script>
     <script type="text/javascript" src="bower_components/angular-animate/angular-animate.js"></script>
     <script type="text/javascript" src="bower_components/angular-aria/angular-aria.js"></script>
@@ -25,13 +24,13 @@
         <div class="inputPanel">
             <h3>Add Place to Map</h3>
             <div id="placeEnter">
-            <label for="placeInput">Enter Place</label>
+                <label for="placeInput">Enter Place</label>
                 <input class="form-control" id="placeInput" type="text" ng-model="place">
                 <span ng-if="noLocationErr" class="help-block">Please enter a valid address or place </span>
                 <span ng-if="repeatPlace" class="help-block"> This place is already on your list </span>
-            </div> 
+            </div>
             <label for="dropdownSubmit">Select Place Type</label>
-               <select name="dropdown" id="dropdownSubmit" class="form-control" ng-model="placeType">
+            <select name="dropdown" id="dropdownSubmit" class="form-control" ng-model="placeType">
                 <option value="restaurant">Food</option>
                 <option value="cafe">Coffee</option>
                 <option value="park">Nature</option>
@@ -42,12 +41,14 @@
                 <option value="camera">Tourist</option>
                 <option value="roadblock">Avoid</option>
                 <option value="star">Other</option>
-                </select>
-              <label for="placeNote">Add Note</label>
-                <textarea class="form-control" id="placeNote" rows="3" ng-model="placeNote" placeholder="Add a note about the place"></textarea>
+            </select>
+            <label for="placeNote">Add Note</label>
+            <textarea class="form-control" id="placeNote" rows="3" ng-model="placeNote" placeholder="Add a note about the place"></textarea>
             <div id="addPlaceActions" class="container-fluid">
                 <div class="row">
-                    <div class="col-xs-6"><div id="innerResetMap"><a href="#" ng-click="resetMap()">Reset Map View</a></div></div>
+                    <div class="col-xs-6">
+                        <div id="innerResetMap"><a href="#" ng-click="resetMap()">Reset Map View</a></div>
+                    </div>
                     <div class="col-xs-1"></div>
                     <input class="col-xs-5 btn" id="addBtn" type="submit" value="Submit" ng-click="submit()">
                 </div>

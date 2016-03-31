@@ -21,8 +21,6 @@
     },
     "devDependencies": {
         "jquery": "^2.2.2",
-        "bootstrap": "^3.3.6",
-        "firebase": "^2.4.1",
-        "angularfire": "^1.1.4"
+        "bootstrap": "^3.3.6"
     }
 }
