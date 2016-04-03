@@ -37,7 +37,7 @@ var templateGeo = function(place, note, type) {
             "phone_number": place.formatted_phone_number,
             "address": formatAddress(place)
         }
-    }
+    };
 
     //add photos if result from places api includes photos
     var placePhotos = function(place) {
@@ -55,16 +55,16 @@ var templateGeo = function(place, note, type) {
             }
             placeTemplate.photos = photoURLs;
         }
-    }
+    };
 
     //add open hours if result from places api includes opening hours
     var openHours = function(place) {
         if (!place.opening_hours) {
             return;
         } else {
-            placeTemplate.openingHours = place.opening_hours.weekday_text
-        };
-    }
+            placeTemplate.openingHours = place.opening_hours.weekday_text;
+        }
+    };
 
     placePhotos(place);
     openHours(place);
@@ -112,7 +112,7 @@ app.controller("AppCtrl", ["$scope", "$mdDialog", "$mdMedia", function($scope, $
         //set view to san francisco 
         map.setView([37.763, -122.482], 13);
         var myLayer = L.mapbox.featureLayer().addTo(map);
-    }
+    };
 
     $scope.placeType = "star";
     google.maps.event.addDomListener(window, "load", $scope.init);
@@ -120,7 +120,7 @@ app.controller("AppCtrl", ["$scope", "$mdDialog", "$mdMedia", function($scope, $
     //set map view to san francisco 
     $scope.resetMap = function() {
         map.setView([37.763, -122.482], 13);
-    }
+    };
 
     //check if place has additional info, used to determine if place should have details popup
     $scope.hasAdditionalInfo = function(placeIndex) {
@@ -129,7 +129,7 @@ app.controller("AppCtrl", ["$scope", "$mdDialog", "$mdMedia", function($scope, $
             return true;
         }
         return false;
-    }
+    };
 
     //add marker to map 
     $scope.addMarker = function(loc, note, type) {
@@ -152,7 +152,7 @@ app.controller("AppCtrl", ["$scope", "$mdDialog", "$mdMedia", function($scope, $
 
         var content = "<h2><strong>" + loc.properties.title + "</strong></h2>";
         if (loc.properties.address) {
-            content += "<h3>" + loc.properties.address + "</h3>"
+            content += "<h3>" + loc.properties.address + "</h3>";
         }
         if (note) {
             content += "<p><i>" + note + "</i></p>";
@@ -162,9 +162,6 @@ app.controller("AppCtrl", ["$scope", "$mdDialog", "$mdMedia", function($scope, $
         newMarker.addTo(map);
         newMarker.bindPopup(content);
     };
-
-    $scope.markerAnimate;
-    $scope.markerUnanimate;
 
     //animate leaflet marker on map on mouseover of corresponding place in list, using Leaflet smooth marker bouncing plugin
     $scope.animateMarker = function(placeIndex) {
@@ -187,7 +184,7 @@ app.controller("AppCtrl", ["$scope", "$mdDialog", "$mdMedia", function($scope, $
             }
             $scope.markers[$scope.markerUnanimate].stopBouncing();
         }
-    }
+    };
 
     //called upon submitting a new place, pushes applies template function to place and then adds it to $scope.places 
     $scope.submit = function() {
