@@ -10,7 +10,7 @@ npm start
 ```
 to install dependencies and start server.  
 
-Navigate to http://localhost:3000/ to view project locally or see live at [https://sf-spots.herokuapp.com/]
+Navigate to localhost:3000 to view project locally or see live at https://sf-spots.herokuapp.com/
 
 ## Main Dependencies
 Angular<br>
