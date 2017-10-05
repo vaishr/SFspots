@@ -10,6 +10,7 @@ module.exports = function(grunt) {
                 }
             }
         },
+
         "jsbeautifier": {
             files: ["js/*.js", "*.{js,json,html,css}"],
             options: {

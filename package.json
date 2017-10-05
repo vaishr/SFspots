@@ -6,8 +6,7 @@
     "dependencies": {
         "bower": "~1.7.7",
         "grunt-cli": "~1.1.0",
-        "grunt-jsbeautifier": "~0.2.10",
-        "lite-server": "~2.1.0"
+        "grunt-jsbeautifier": "~0.2.10"
     },
     "devDependencies": {
         "grunt-cli": "^1.1.0",
@@ -17,7 +16,7 @@
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "./node_modules/lite-server/bin/lite-server"
+        "start": "node server.js"
     },
     "repository": {
         "type": "git",
