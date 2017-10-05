@@ -9,10 +9,11 @@
         "grunt-jsbeautifier": "~0.2.10"
     },
     "devDependencies": {
-        "grunt-cli": "^1.1.0",
+        "express": "^4.16.1",
         "grunt": "^0.4.5",
-        "load-grunt-tasks": "^3.4.1",
-        "grunt-contrib-jshint": "^1.0.0"
+        "grunt-cli": "^1.1.0",
+        "grunt-contrib-jshint": "^1.0.0",
+        "load-grunt-tasks": "^3.4.1"
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
