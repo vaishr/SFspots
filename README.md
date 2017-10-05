@@ -8,7 +8,9 @@ npm install
 bower install
 npm start
 ```
-to install dependencies and start lite-server
+to install dependencies and start server.  
+
+Navigate to http://localhost:3000/ to view project locally or see live at [https://sf-spots.herokuapp.com/]
 
 ## Main Dependencies
 Angular<br>
@@ -20,5 +22,5 @@ Bootstrap
 
 
 ## Next Steps
-1. Functionality to easily create maps for any city
+1. Functionality to easily create maps for other major cities
 2. Incorporate Firebase to create user accounts and generate map links to share maps
